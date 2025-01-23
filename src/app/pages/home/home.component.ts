@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, inject } from '@angular/core';
+import { ApiService } from '../../services/api.service';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+apiService: ApiService = inject(ApiService);
 
+constructor() {
+this.apiService.getResponses().subscribe((res) => {
+  console.log(res)
+})
+}
 }

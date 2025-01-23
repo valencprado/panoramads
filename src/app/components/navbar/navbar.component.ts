@@ -1,23 +1,30 @@
 import { Component, Input } from '@angular/core';
 import { MenubarModule } from 'primeng/menubar';
+import { MenuItem, PrimeIcons } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 
-type item = {
-  label: string
-}
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MenubarModule],
+  imports: [ButtonModule, MenubarModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-
 export class NavbarComponent {
   @Input()
-  items: item[] = [
-    {
-      label: 'teste',
-    },
-    { label: 'teste2' },
+  items: MenuItem[] = [
+    { label: 'Home', routerLink: '/' },
+    { label: 'Sobre', routerLink: '/about' },
   ];
+  icon: string = 'pi pi-sun';
+  toggleDarkMode() {
+    const element = document.querySelector('html');
+    element!.classList.toggle('dark-theme');
+    if(element?.classList.contains('dark-theme')) {
+      this.icon = 'pi pi-moon'
+    }
+    else {
+      this.icon = 'pi pi-sun'
+    }
+  }
 }

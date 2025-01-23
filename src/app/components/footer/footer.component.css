@@ -3,7 +3,7 @@ div {
   bottom: 0;
   clear: both;
   display: block;
-  /* padding: .75rem; */
+  padding: .75rem;
   overflow: hidden;
   width: 100%;
 }
