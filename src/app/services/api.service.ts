@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpBackend, HttpClient} from '@angular/common/http'
+import { HttpClient} from '@angular/common/http'
 import { Observable } from 'rxjs';
-type ApiReturn = {
-  data: {
-    [key: string]: {
-      "value": string
-      "count": number
-    }
-  }
-}
+import { ApiReturn } from '../types/apiReturn';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getResponses(): Observable<Object> {
-    return this.http.get(`${this.url}`)
+  getResponses(): Observable<ApiReturn> {
+    return this.http.get<ApiReturn>(`${this.url}`)
   }
 
 }

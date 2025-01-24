@@ -5,7 +5,7 @@ import { ChartModule } from 'primeng/chart'
   standalone: true,
   imports: [ChartModule],
   templateUrl: './chart.component.html',
-  styleUrl: './chart.component.css'
+  styleUrl: './chart.component.scss'
 })
 export class ChartComponent {
 @Input()

@@ -1,18 +1,22 @@
-import { Component, inject } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { SectionOneComponent } from './components/section-one/section-one.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [SectionOneComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-apiService: ApiService = inject(ApiService);
+export class HomeComponent implements OnInit {
+
+data: Object = {}
 
 constructor() {
-this.apiService.getResponses().subscribe((res) => {
-  console.log(res)
-})
+
 }
+
+ngOnInit(): void {
+
+}
+
 }

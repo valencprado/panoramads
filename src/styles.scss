@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import "primeicons/primeicons.css";
+// @use "primeicons/primeicons.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-:root {
-  --main-blue: #CAF0F8;
-  --grey: #D9D9D9;
 
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 
 * {
   border: 0;

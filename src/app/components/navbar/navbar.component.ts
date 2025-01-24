@@ -8,7 +8,7 @@ import { ButtonModule } from 'primeng/button';
   standalone: true,
   imports: [ButtonModule, MenubarModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+  styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
   @Input()
