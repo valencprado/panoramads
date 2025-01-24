@@ -22,7 +22,7 @@
     "@angular/router": "^18.2.0",
     "@angular/ssr": "^18.2.2",
     "@primeng/themes": "^19.0.5",
-    "@tailwindcss/postcss": "^3.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
     "chart.js": "^4.4.7",
     "chartjs": "^0.3.24",
     "dotenv": "^16.4.7",
