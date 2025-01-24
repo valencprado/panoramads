@@ -9,7 +9,7 @@ import { $dt } from '@primeng/themes';
   standalone: true,
   imports: [ChartModule],
   templateUrl: './section-one.component.html',
-  styleUrl: './section-one.component.css',
+  styleUrl: './section-one.component.scss',
 })
 export class SectionOneComponent implements OnInit {
   data: Data = {
