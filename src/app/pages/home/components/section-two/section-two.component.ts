@@ -2,22 +2,22 @@ import { Component, Input } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { ChartComponent } from '../../../../components/chart/chart.component';
 @Component({
-  selector: 'section-one',
+  selector: 'section-two',
   standalone: true,
   imports: [ChartModule, ChartComponent],
-  templateUrl: './section-one.component.html',
-  styleUrl: './section-one.component.scss',
+  templateUrl: './section-two.component.html',
+  styleUrl: './section-two.component.scss',
 })
-export class SectionOneComponent {
+export class SectionTwoComponent {
 
   @Input()
   data: any;
   @Input()
   options: any;
-  @Input()
-  width: string = '400';
-  @Input()
-  height: string = '400';
+
+  width: string = '400px';
+
+  height: string = '400px';
 
   // data: Data = {
   //   idade: [

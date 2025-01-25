@@ -2,18 +2,22 @@ import { Component, Input } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { ChartComponent } from '../../../../components/chart/chart.component';
 @Component({
-  selector: 'section-one',
+  selector: 'section-three',
   standalone: true,
   imports: [ChartModule, ChartComponent],
-  templateUrl: './section-one.component.html',
-  styleUrl: './section-one.component.scss',
+  templateUrl: './section-three.component.html',
+  styleUrl: './section-three.component.scss',
 })
-export class SectionOneComponent {
+export class SectionThreeComponent {
 
   @Input()
-  data: any;
+  semesterData: any;
+   @Input()
+  genderData: any;
   @Input()
-  options: any;
+  semesterOptions: any;
+  @Input()
+  genderOptions: any;
   @Input()
   width: string = '400';
   @Input()

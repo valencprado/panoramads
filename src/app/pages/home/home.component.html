@@ -1,15 +1,20 @@
+<div class="content">
 
-  <div class="content">
+  <h1>PanoramADS: oportunidades e tendências dos estudantes de ADS </h1>
 
-    <h1>PanoramADS: oportunidades e tendências dos estudantes de ADS </h1>
+  <p>A API tem como objetivo mapear e analisar tendências e oportunidades de estágio para estudantes de Análise e
+    Desenvolvimento de Sistemas na área de TI, considerando diferentes semestres de formação. </p>
 
-    <p>A API tem como objetivo mapear e analisar tendências e oportunidades de estágio para estudantes de Análise e
-      Desenvolvimento de Sistemas na área de TI, considerando diferentes semestres de formação. </p>
-
-      <p>Os dados utilizados têm origem em uma pesquisa realizada por meio de Google Forms, garantindo informações
+  <p>Os dados utilizados têm origem em uma pesquisa realizada por meio de Google Forms, garantindo informações
     atualizadas
     e relevantes, além de auxiliar na identificação de oportunidades e no entendimento das demandas do mercado.</p>
 
-  </div>
+</div>
 
-<section-one></section-one>
+<section-one [data]="sectionOneData" [options]="sectionOneOptions"></section-one>
+<section-two [data]="sectionTwoData" [options]="sectionTwoOptions"></section-two>
+<section-three [genderData]="genderData" [genderOptions]="genderOptions"
+  [semesterData]="semesterData"
+  [semesterOptions]="semesterOptions"
+  ></section-three>
+<!-- <section-four></section-four> -->
