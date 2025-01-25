@@ -1,11 +1,11 @@
 <p-menubar [model]="items">
 <ng-template #start>
-<img src="panorama-ads.png" alt="" style="width: 40%;">
+<img src="panorama-ads.png" alt="" style="width: 40%;" class="navbar__brand">
 </ng-template>
 
 
 <ng-template #end>
 
-<p-button (onClick)="toggleDarkMode()"><i [class]="icon" style="background-color: var(--p-blue-500);" severity="info"></i></p-button>
+<p-button (onClick)="toggleDarkMode()"><i [class]="icon"  severity="info"></i></p-button>
 </ng-template>
 </p-menubar>
