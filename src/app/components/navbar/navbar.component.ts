@@ -19,7 +19,9 @@ export class NavbarComponent {
   icon: string = 'pi pi-sun';
   toggleDarkMode() {
     const element = document.querySelector('html');
+    const navbarBrand = document.querySelector('.navbar__brand')
     element!.classList.toggle('dark-theme');
+    navbarBrand?.classList.toggle('dark-brand')
     if(element?.classList.contains('dark-theme')) {
       this.icon = 'pi pi-moon'
     }
