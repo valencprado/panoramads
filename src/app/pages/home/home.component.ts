@@ -6,11 +6,16 @@ import { Response } from '../../types/responses';
 import { $dt } from '@primeng/themes';
 import { SectionOneComponent } from './components/section-one/section-one.component';
 import { SectionTwoComponent } from './components/section-two/section-two.component';
-import { SectionThreeComponent } from "./components/section-three/section-three.component";
+import { SectionThreeComponent } from './components/section-three/section-three.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SectionOneComponent, SectionTwoComponent, ChartModule, SectionThreeComponent],
+  imports: [
+    SectionOneComponent,
+    SectionTwoComponent,
+    ChartModule,
+    SectionThreeComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -109,6 +114,7 @@ export class HomeComponent {
   genderQuestion: any;
   sectionFourQuestion: any;
   responses: any;
+  count_responses: any;
   constructor() {
     this.apiService.getResponses().subscribe((res: ApiReturn) => {
       this.data = res.data;
@@ -145,26 +151,24 @@ export class HomeComponent {
 
     this.responses = this.sectionTwoQuestion
       .filter((obj: Response) => obj.value != '')
-      .map((obj: Response) => Number(obj.value))
-      .sort();
+      .sort((a: Response, b: Response) => Number(a.value) - Number(b.value));
+
     this.sectionTwoData = {
-      labels: [1, 2, ...this.responses],
+      labels: [1, 2, ...this.responses.map((obj: Response) => obj.value)],
       datasets: [
         {
           label: 'Nível de satisfação (escala de 1 a 5)',
           data: [
             0,
             0,
-            ...this.sectionTwoQuestion
-              .filter((obj: Response) => obj.value != '')
-              .map((obj: Response) => obj.count),
+            ...this.responses.map((obj: Response) => obj.count),
           ],
           backgroundColor: [
             $dt('rose.400').value,
             $dt('rose.400').value,
-            $dt('emerald.400').value,
-            $dt('cyan.400').value,
-            $dt('rose.400').value,
+            $dt('green.400').value,
+            $dt('fuchsia.400').value,
+            $dt('yellow.300').value,
           ],
         },
       ],
@@ -183,11 +187,7 @@ export class HomeComponent {
       datasets: [
         {
           data: this.semesterQuestion.map((obj: Response) => obj.count),
-          backgroundColor: [
-            $dt('indigo.400').value,
-            $dt('cyan.300').value,
-
-          ],
+          backgroundColor: [$dt('indigo.400').value, $dt('cyan.300').value],
         },
       ],
     };
@@ -202,11 +202,7 @@ export class HomeComponent {
       datasets: [
         {
           data: this.genderQuestion.map((obj: Response) => obj.count),
-          backgroundColor: [
-            $dt('teal.400').value,
-            $dt('orange.400').value,
-
-          ],
+          backgroundColor: [$dt('teal.400').value, $dt('orange.400').value],
         },
       ],
     };
