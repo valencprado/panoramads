@@ -2,7 +2,7 @@
   <h3>Atuação dos alunos</h3>
   <p class="text-center">Como os participantes estão inseridos no mercado no momento da pesquisa?</p>
 </div>
-<div class="">
-
-  <p-chart type="pie" [data]="data_formatted" [options]="options" width="400" height="400"/>
+<div class="flex items-center justify-center">
+<p>O tipo predominante de trabalho é o <strong>estágio</strong>.</p>
+  <app-chart type="pie" [data]="data" [options]="options" [width]="width" [height]="height"/>
 </div>
