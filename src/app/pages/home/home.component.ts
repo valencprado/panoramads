@@ -7,14 +7,18 @@ import { $dt } from '@primeng/themes';
 import { SectionOneComponent } from './components/section-one/section-one.component';
 import { SectionTwoComponent } from './components/section-two/section-two.component';
 import { SectionThreeComponent } from './components/section-three/section-three.component';
+import { ConclusionComponent } from './components/conclusion/conclusion.component';
 import { SectionFourComponent } from './components/section-four/section-four.component';
+import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
+AnimateOnScrollModule,
+    ChartModule,
+    ConclusionComponent,
     SectionOneComponent,
     SectionTwoComponent,
-    ChartModule,
     SectionThreeComponent,
     SectionFourComponent,
   ],
@@ -137,7 +141,6 @@ export class HomeComponent {
     });
   }
 
-
   initChartOne() {
     this.sectionOneQuestion = this.data.atuacao_atual;
     this.sectionOneData = {
@@ -240,8 +243,7 @@ export class HomeComponent {
     ].sort(
       (a: Response, b: Response) =>
         this.regionsOrder.indexOf(a.value) - this.regionsOrder.indexOf(b.value)
-    );;
-    console.log(this.habitationQuestion)
+    );
 
     this.sectionFourData = {
       labels: [...this.workAreaQuestion.map((obj: Response) => obj.value)],

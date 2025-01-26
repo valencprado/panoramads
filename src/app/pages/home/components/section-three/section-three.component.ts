@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { ChartComponent } from '../../../../components/chart/chart.component';
+import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 @Component({
   selector: 'section-three',
   standalone: true,
-  imports: [ChartModule, ChartComponent],
+  imports: [AnimateOnScrollModule, ChartModule, ChartComponent],
   templateUrl: './section-three.component.html',
   styleUrl: './section-three.component.scss',
 })

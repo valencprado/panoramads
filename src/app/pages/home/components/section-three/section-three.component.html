@@ -1,8 +1,12 @@
-<div class="flex flex-col items-center">
-  <h3>Perfil dos estudantes</h3>
-  <p class="text-center">Os respondentes são predominantemente <strong>masculinos</strong> do <strong> segundo semestre.</strong></p>
-</div>
-<div class="flex items-center justify-center">
-  <app-chart type="pie" [data]="semesterData" [options]="semesterOptions" [width]="width" [height]="height"/>
-  <app-chart type="pie" [data]="genderData" [options]="genderOptions" [width]="width" [height]="height"/>
+<div pAnimateOnScroll enterClass="animate-fadeinleft" leaveClass="animate-fadeoutleft  "class="section-content flex flex-col items-center animate-ease-in-out animate-duration-1000">
+
+  <div>
+    <h3>Perfil dos estudantes</h3>
+    <p class="text-center">Os respondentes são predominantemente <strong>masculinos</strong> do <strong> segundo semestre.</strong></p>
+  </div>
+  <div class="flex items-center justify-center section-content">
+    <app-chart type="pie" [data]="semesterData" [options]="semesterOptions" [width]="width" [height]="height"/>
+    <app-chart type="pie" [data]="genderData" [options]="genderOptions" [width]="width" [height]="height"/>
+  </div>
+
 </div>
