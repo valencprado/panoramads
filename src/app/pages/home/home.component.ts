@@ -6,11 +6,22 @@ import { Response } from '../../types/responses';
 import { $dt } from '@primeng/themes';
 import { SectionOneComponent } from './components/section-one/section-one.component';
 import { SectionTwoComponent } from './components/section-two/section-two.component';
-import { SectionThreeComponent } from "./components/section-three/section-three.component";
+import { SectionThreeComponent } from './components/section-three/section-three.component';
+import { ConclusionComponent } from './components/conclusion/conclusion.component';
+import { SectionFourComponent } from './components/section-four/section-four.component';
+import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SectionOneComponent, SectionTwoComponent, ChartModule, SectionThreeComponent],
+  imports: [
+AnimateOnScrollModule,
+    ChartModule,
+    ConclusionComponent,
+    SectionOneComponent,
+    SectionTwoComponent,
+    SectionThreeComponent,
+    SectionFourComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -107,15 +118,26 @@ export class HomeComponent {
   sectionTwoQuestion: any;
   semesterQuestion: any;
   genderQuestion: any;
-  sectionFourQuestion: any;
+  habitationQuestion: any;
+  workAreaQuestion: any;
+
   responses: any;
+
+  regionsOrder: string[] = [
+    'Zona Norte',
+    'Zona Oeste',
+    'Zona Sul',
+    'Zona Leste',
+    'Centro',
+  ];
+
   constructor() {
     this.apiService.getResponses().subscribe((res: ApiReturn) => {
       this.data = res.data;
       this.initChartOne();
       this.initChartTwo();
       this.initChartThree();
-      // this.initChartFour();
+      this.initChartFour();
     });
   }
 
@@ -145,32 +167,26 @@ export class HomeComponent {
 
     this.responses = this.sectionTwoQuestion
       .filter((obj: Response) => obj.value != '')
-      .map((obj: Response) => Number(obj.value))
-      .sort();
+      .sort((a: Response, b: Response) => Number(a.value) - Number(b.value));
+
     this.sectionTwoData = {
-      labels: [1, 2, ...this.responses],
+      labels: [1, 2, ...this.responses.map((obj: Response) => obj.value)],
       datasets: [
         {
           label: 'Nível de satisfação (escala de 1 a 5)',
-          data: [
-            0,
-            0,
-            ...this.sectionTwoQuestion
-              .filter((obj: Response) => obj.value != '')
-              .map((obj: Response) => obj.count),
-          ],
+          data: [0, 0, ...this.responses.map((obj: Response) => obj.count)],
           backgroundColor: [
             $dt('rose.400').value,
             $dt('rose.400').value,
-            $dt('emerald.400').value,
-            $dt('cyan.400').value,
-            $dt('rose.400').value,
+            $dt('green.400').value,
+            $dt('fuchsia.400').value,
+            $dt('yellow.300').value,
           ],
         },
       ],
     };
 
-    this.sectionOneOptions = {
+    this.sectionTwoOptions = {
       responsive: true,
     };
   }
@@ -183,11 +199,7 @@ export class HomeComponent {
       datasets: [
         {
           data: this.semesterQuestion.map((obj: Response) => obj.count),
-          backgroundColor: [
-            $dt('indigo.400').value,
-            $dt('cyan.300').value,
-
-          ],
+          backgroundColor: [$dt('indigo.400').value, $dt('cyan.300').value],
         },
       ],
     };
@@ -202,16 +214,54 @@ export class HomeComponent {
       datasets: [
         {
           data: this.genderQuestion.map((obj: Response) => obj.count),
-          backgroundColor: [
-            $dt('teal.400').value,
-            $dt('orange.400').value,
-
-          ],
+          backgroundColor: [$dt('teal.400').value, $dt('orange.400').value],
         },
       ],
     };
 
     this.genderOptions = {
+      responsive: true,
+    };
+  }
+
+  initChartFour() {
+    this.workAreaQuestion = [
+      { value: 'Zona Leste', count: 0 },
+      { value: 'Zona Norte', count: 0 },
+      ...this.data.regiao_trabalho.filter(
+        (obj: Response) => obj.value != 'Não atuo no momento'
+      ),
+    ].sort(
+      (a: Response, b: Response) =>
+        this.regionsOrder.indexOf(a.value) - this.regionsOrder.indexOf(b.value)
+    );
+
+    this.habitationQuestion = [
+      { value: 'Zona Leste', count: 0 },
+      { value: 'Zona Sul', count: 0 },
+      ...this.data.regiao,
+    ].sort(
+      (a: Response, b: Response) =>
+        this.regionsOrder.indexOf(a.value) - this.regionsOrder.indexOf(b.value)
+    );
+
+    this.sectionFourData = {
+      labels: [...this.workAreaQuestion.map((obj: Response) => obj.value)],
+      datasets: [
+        {
+          label: 'Habita a região',
+          data: [...this.habitationQuestion.map((obj: Response) => obj.count)],
+          backgroundColor: [$dt('sky.400').value],
+        },
+        {
+          label: 'Trabalha na região',
+          data: [...this.workAreaQuestion.map((obj: Response) => obj.count)],
+          backgroundColor: [$dt('slate.400').value],
+        },
+      ],
+    };
+
+    this.sectionFourOptions = {
       responsive: true,
     };
   }

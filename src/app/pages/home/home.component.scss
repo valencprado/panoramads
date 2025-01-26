@@ -1,0 +1,22 @@
+:host {
+    @keyframes slidedown-icon {
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(20px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    .slidedown-icon {
+      margin-top: 1rem;
+        animation: slidedown-icon;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+    }
+  }
