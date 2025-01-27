@@ -9,18 +9,18 @@ import { SectionTwoComponent } from './components/section-two/section-two.compon
 import { SectionThreeComponent } from './components/section-three/section-three.component';
 import { ConclusionComponent } from './components/conclusion/conclusion.component';
 import { SectionFourComponent } from './components/section-four/section-four.component';
-import { AnimateOnScrollModule } from 'primeng/animateonscroll';
+import { SectionFiveComponent } from './components/section-five/section-five.component';
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-AnimateOnScrollModule,
     ChartModule,
     ConclusionComponent,
     SectionOneComponent,
     SectionTwoComponent,
     SectionThreeComponent,
     SectionFourComponent,
+    SectionFiveComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -107,18 +107,22 @@ export class HomeComponent {
   semesterOptions: any;
   genderOptions: any;
   sectionFourOptions: any;
+  sectionFiveOptions: any;
 
   sectionOneData: any;
   sectionTwoData: any;
   semesterData: any;
   genderData: any;
   sectionFourData: any;
+  sectionFiveData: any;
 
   sectionOneQuestion: any;
   sectionTwoQuestion: any;
   semesterQuestion: any;
   genderQuestion: any;
   habitationQuestion: any;
+  desiredAreaQuestion: any;
+  workingAreaQuestion: any;
   workAreaQuestion: any;
 
   responses: any;
@@ -131,6 +135,16 @@ export class HomeComponent {
     'Centro',
   ];
 
+  areasOrder: string[] = [
+    'Garantia de Qualidade/QA',
+    'Desenvolvimento Back-End',
+    'Análise de Dados',
+    'Cibersegurança / Segurança da Informação',
+    'Desenvolvimento Full-Stack',
+    'Machine Learning/Inteligência Artificial',
+    'Desenvolvimento de Jogos',
+  ];
+
   constructor() {
     this.apiService.getResponses().subscribe((res: ApiReturn) => {
       this.data = res.data;
@@ -138,6 +152,7 @@ export class HomeComponent {
       this.initChartTwo();
       this.initChartThree();
       this.initChartFour();
+      this.initChartFive();
     });
   }
 
@@ -263,6 +278,78 @@ export class HomeComponent {
 
     this.sectionFourOptions = {
       responsive: true,
+    };
+  }
+  initChartFive() {
+    this.workingAreaQuestion = [
+      { value: 'Desenvolvimento de Jogos', count: 0 },
+      ...this.data.area_atual,
+    ]
+      .filter(
+        (obj: Response) =>
+          obj.value != 'Não atuo no momento' && this.areasOrder.includes(obj.value)
+      )
+      .sort(
+        (a: Response, b: Response) =>
+          this.areasOrder.indexOf(a.value) - this.areasOrder.indexOf(b.value)
+      );
+
+    this.desiredAreaQuestion = [
+      { value: 'Garantia de Qualidade/QA', count: 0 },
+      ...this.data.area_desejo,
+    ]
+      .filter((obj: Response) => this.areasOrder.includes(obj.value))
+      .sort(
+        (a: Response, b: Response) =>
+          this.areasOrder.indexOf(a.value) - this.areasOrder.indexOf(b.value)
+      );
+
+
+    this.sectionFiveData = {
+      labels: [...this.workingAreaQuestion.map((obj: Response) => obj.value)],
+      datasets: [
+        {
+          type: 'bar',
+          label: 'Área de desejo',
+          data: [
+            ...this.desiredAreaQuestion.map((obj: Response) => obj.count),
+          ],
+          backgroundColor: [$dt('orange.400').value],
+        },
+        {
+          type: 'bar',
+          label: 'Área de trabalho',
+          data: [...this.workingAreaQuestion.map((obj: Response) => obj.count)],
+          backgroundColor: [$dt('stone.400').value],
+        },
+      ],
+    };
+
+    this.sectionFiveOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      aspectRatio: 0.8,
+      plugins: {
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+        },
+      },
+      scales: {
+        x: {
+          stacked: true,
+          grid: {
+            drawBorder: false,
+          },
+        },
+        y: {
+          stacked: true,
+
+          grid: {
+            drawBorder: false,
+          },
+        },
+      },
     };
   }
 }
