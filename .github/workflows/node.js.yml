@@ -33,4 +33,3 @@ jobs:
         CHROME_BIN: "/usr/bin/google-chrome-stable"
     # - run: npm audit fix --force
     - run: npm run build --if-present
-
